@@ -70,6 +70,7 @@ function sendEmail() {
             counter++;
         }
         body += "</html>";
+        alert("Sending...");
         Email.send({
         Host: "smtp.gmail.com",
         Username : "kindlenotepadwebapp@gmail.com",
