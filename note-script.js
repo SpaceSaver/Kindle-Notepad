@@ -62,7 +62,7 @@ function sendEmail() {
         while (true) {
             if (getCookie("Paige" + counter.toString()) !== ""){
                 body += "<h1>Page " + counter.toString() + "</h1><p>" + getCookie("Paige" + counter.toString()) + "</p>";
-                alert(getCookie("Paige" + counter.toString()))
+                //alert(getCookie("Paige" + counter.toString()))
             }
             else{
                 break
