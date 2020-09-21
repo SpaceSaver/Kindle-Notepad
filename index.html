@@ -1,5 +1,6 @@
 <html>
     <head>
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
         <script src="note-script.js"></script>
         <style>
             .bbar {
@@ -15,6 +16,7 @@
                 <button class="bbar" id="back" onclick="window.location.href = window.location.href.split('?')[0] + '?p=' + (p(1) - 1).toString();" style="display:inline-block;width:30%;">&lt;-</button>
                 <p class="bbar" id="paigedisp" style="display:inline-block;height:inherit;"></p>
                 <button class="bbar" id="forward" onclick="window.location.href = window.location.href.split('?')[0] + '?p=' + (p(1) + 1).toString();" style="display:inline-block;width:30%;">-&gt;</button>
+                <button class="bbar" id="Share" style="display:inline-block;width:15%;" onclick="sendEmail();">Share</button>
             </div>
         </div>
         <p style="display:none;" id="pn">1</p>
