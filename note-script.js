@@ -51,6 +51,40 @@ function updateCookies(){
     button.innerHTML = "Saved!"
     setTimeout(function(){document.getElementById("KitKat Bar").innerHTML = "💾Save💾";}, 2000);
 }
+function sendEmail() {
+    var recip = prompt("What email would you like this to go to?", "exampleuser@example.co.uk")
+    if (recip == "" || recip == null){
+        alert("Nothing has been sent...");
+    }
+    else {
+        var body = "<html>";
+        var counter = 1;
+        while (true) {
+            if (getCookie("Paige" + counter.toString()) !== ""){
+                body += "<h1>Page " + counter.toString() + "</h1><p>" + getCookie("Paige" + counter.toString()) + "</p>";
+                alert(getCookie("Paige" + counter.toString()))
+            }
+            else{
+                break
+            }
+            counter++;
+        }
+        body += "</html>";
+        Email.send({
+        Host: "smtp.gmail.com",
+        Username : "kindlenotepadwebapp@gmail.com",
+        Password : "B0tsRule",
+        To : recip,
+        From : "kindlenotepadwebapp@gmail.com",
+        Subject : "Your Kindle Notepad Creation!",
+        Body : body,
+        }).then(
+            function(message){
+                alert("Mail sent successfully!")
+            }
+        );
+    }
+}
 var addvar = getVarParse();
 onload = function(){
     console.log(addvar);
@@ -63,5 +97,5 @@ onload = function(){
     console.log(getCookie(p()));
     document.getElementById("Paige").value = getCookie(p());
     document.getElementById("Paige").onchange = "updateCookies();";
-    document.getElementById("paigedisp").innerHTML = p(1).toString()
+    document.getElementById("paigedisp").innerHTML = p(1).toString();
 }
