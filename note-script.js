@@ -47,7 +47,7 @@ function deleteCookie(cname){
 function updateCookies(){
     var button = document.getElementById("KitKat Bar");
     button.innerHTML = "Saving↻..."
-    setCookie(p(),document.getElementById("Paige").value);
+    setCookie(p(),document.getElementById("Paige").value,36500);
     button.innerHTML = "Saved!"
     setTimeout(function(){document.getElementById("KitKat Bar").innerHTML = "💾Save💾";}, 2000);
 }
