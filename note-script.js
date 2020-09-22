@@ -81,10 +81,29 @@ function sendEmail() {
         Body : body,
         }).then(
             function(message){
-                alert("Mail sent successfully!");
+                alert("Mail sent successfully!")
             }
         );
     }
+}
+function DAT(){
+    var body = "<html>";
+        var counter = 1;
+        while (true) {
+            if (getCookie("Paige" + counter.toString()) !== ""){
+                body += "<h1>Page " + counter.toString() + "</h1><p>" + getCookie("Paige" + counter.toString()) + "</p>";
+                //alert(getCookie("Paige" + counter.toString()))
+            }
+            else{
+                break
+            }
+            counter++;
+        };
+    body += "</html>"
+    //var data = new Blob([body], {type: 'text/plain'});
+    //var url = window.URL.createObjectURL(data);
+    //document.location.href = url;
+    download(new Blob([body]),"KindleNotepadCreation.txt","text/plain");
 }
 var addvar = getVarParse();
 onload = function(){
@@ -93,7 +112,7 @@ onload = function(){
         document.getElementById("pn").innerHTML = addvar["p"];
     }
     if (p(1) == 1){
-        document.getElementById("back").style.display = "none";
+        document.getElementById("back").disabled = "true";
     }
     console.log(getCookie(p()));
     document.getElementById("Paige").value = getCookie(p());
