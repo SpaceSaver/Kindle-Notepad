@@ -88,22 +88,89 @@ function sendEmail() {
 }
 function DAT(){
     var body = "<html>";
-        var counter = 1;
-        while (true) {
-            if (getCookie("Paige" + counter.toString()) !== ""){
-                body += "<h1>Page " + counter.toString() + "</h1><p>" + getCookie("Paige" + counter.toString()) + "</p>";
-                //alert(getCookie("Paige" + counter.toString()))
-            }
-            else{
-                break
-            }
-            counter++;
-        };
+    var counter = 1;
+    while (true) {
+        if (getCookie("Paige" + counter.toString()) !== ""){
+            body += "<h1>Page " + counter.toString() + "</h1><p>" + getCookie("Paige" + counter.toString()) + "</p>";
+            //alert(getCookie("Paige" + counter.toString()))
+        }
+        else{
+            break
+        }
+        counter++;
+    };
     body += "</html>"
     //var data = new Blob([body], {type: 'text/plain'});
     //var url = window.URL.createObjectURL(data);
     //document.location.href = url;
     download(new Blob([body]),"KindleNotepadCreation.txt","text/plain");
+}
+function sendDataJSON(){
+    var xhttp = new XMLHttpRequest();
+    var body = "{";
+    var counter = 1;
+    while (true) {
+        if (getCookie("Paige" + counter.toString()) !== ""){
+            if (counter > 1) {
+                body += ","
+            }
+            var ckey = "Page " + counter.toString()
+            var cval = getCookie("Paige" + counter.toString())
+            body += "\"" + ckey + "\":\"" + cval + "\"";
+            //alert(getCookie("Paige" + counter.toString()))
+        }
+        else{
+            break
+        }
+        counter++;
+    };
+    body += "}"
+    alert(body);
+    var outputCode;
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status.toString()[0] == "2") {
+            outputCode = this.getResponseHeader("Location");
+            alert("Your output has gone to: " + outputCode);
+        }
+    };
+    xhttp.open("POST","https://jsonblob.com/api/jsonBlob");
+    xhttp.setRequestHeader("Content-type","application/json");
+    xhttp.setRequestHeader("Accept","application/json");
+    xhttp.send(body);
+}
+function receiveDataJSON(){
+    var url = prompt("What's your data url?");
+    if (url !== "" && url !== null){
+        var xhttp = new XMLHttpRequest();
+        var outputCode;
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status.toString()[0] == "2") {
+                outputCode = this.response;
+                outputCode = JSON.parse(outputCode);
+                if (confirm("Received: " + this.response + "\nWould you like to import it?")){
+                    clearInterval(autoSave);
+                    var x;
+                    for (x in outputCode) {
+                        setCookie(x.replace("Page ","Paige"), outputCode[x])
+                    }
+                    var cxhttp = new XMLHttpRequest();
+                    cxhttp.open("DELETE", url);
+                    cxhttp.send();
+                    alert("Transfer complete!\n(Autosave has been stopped.  To resume autosave and get the correct information for the current page, refresh the page or change pages.)")
+                }
+                else{
+                    alert("Nothing has been changed...");
+                }
+            }
+        };
+        xhttp.open("GET",url);
+        xhttp.setRequestHeader("Content-type","application/json");
+        xhttp.setRequestHeader("Accept","application/json");
+        xhttp.send();
+    }
+    else{
+        alert("Nothing's been changed...");
+    }
 }
 var addvar = getVarParse();
 onload = function(){
@@ -118,4 +185,6 @@ onload = function(){
     document.getElementById("Paige").value = getCookie(p());
     document.getElementById("Paige").onchange = "updateCookies();";
     document.getElementById("paigedisp").innerHTML = p(1).toString();
+    updateCookies();
+    autoSave = setInterval(updateCookies, 5000);
 }
