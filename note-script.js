@@ -129,6 +129,8 @@ function sendDataJSON(){
     var outputCode;
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 201) {
+            alert(this.status.toString());
+            alert(this.response);
             alert(xhttp.getAllResponseHeaders());
             outputCode = this.getResponseHeader("Location");
             alert("Your output has gone to: " + outputCode);
