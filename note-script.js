@@ -139,7 +139,7 @@ function sendDataJSON(){
     xhttp.open("POST","https://jsonblob.com/api/jsonBlob");
     xhttp.setRequestHeader("Content-type","application/json");
     xhttp.setRequestHeader("Accept","application/json");
-    xhttp.setRequestHeader("Location","You tell me...");
+    xhttp.setRequestHeader("Access-Control-Expose-Headers","Location");
     xhttp.send(body);
 }
 function receiveDataJSON(){
