@@ -214,4 +214,8 @@ onload = function(){
     document.getElementById("paigedisp").innerHTML = p(1).toString();
     updateCookies();
     autoSave = setInterval(updateCookies, 20000);
+    if (navigator.userAgent.toLowerCase().indexOf("kindle") !== -1){
+        document.getElementById("Share").style.display = "none";
+        document.getElementById("Share 2").style.display = "none";
+    }
 }
