@@ -298,8 +298,8 @@ onload = function(){
     if (getCookie("PC") == "1"){
         document.getElementById("Share").style.display = "inline-block";
         document.getElementById("Share 2").style.display = "inline-block";
-        document.getElementById("Receive").onclick = "receiveDataJSON();";
-        document.getElementById("Send").onclick = "csendDataJSON();";
+        document.getElementById("Receive").onclick = receiveDataJSON;
+        document.getElementById("Send").onclick = csendDataJSON;
     }
 }
 if (getCookie("PC") == "") {
