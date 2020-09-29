@@ -130,7 +130,7 @@ function sendDataJSON(){
         alert(body);
         var outputCode;
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 201) {
+            if (this.readyState == 4 && this.status == 200) {
                 alert(this.status.toString());
                 alert(this.response);
                 alert(xhttp.getAllResponseHeaders());
