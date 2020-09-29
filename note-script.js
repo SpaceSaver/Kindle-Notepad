@@ -106,44 +106,64 @@ function DAT(){
     download(new Blob([body]),"KindleNotepadCreation.txt","text/plain");
 }
 function sendDataJSON(){
-    var xhttp = new XMLHttpRequest();
-    var body = "{";
-    var counter = 1;
-    while (true) {
-        if (getCookie("Paige" + counter.toString()) !== ""){
-            if (counter > 1) {
-                body += ","
+    var url = prompt("What's your data url?");
+    if (url !== null && url !== ""){
+        var xhttp = new XMLHttpRequest();
+        var body = "{";
+        var counter = 1;
+        while (true) {
+            if (getCookie("Paige" + counter.toString()) !== ""){
+                if (counter > 1) {
+                    body += ","
+                }
+                var ckey = "Page " + counter.toString()
+                var cval = getCookie("Paige" + counter.toString())
+                body += "\"" + ckey + "\":\"" + cval + "\"";
+                //alert(getCookie("Paige" + counter.toString()))
             }
-            var ckey = "Page " + counter.toString()
-            var cval = getCookie("Paige" + counter.toString())
-            body += "\"" + ckey + "\":\"" + cval + "\"";
-            //alert(getCookie("Paige" + counter.toString()))
-        }
-        else{
-            break
-        }
-        counter++;
-    };
-    body += "}"
-    alert(body);
-    var outputCode;
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 201) {
-            alert(this.status.toString());
-            alert(this.response);
-            alert(xhttp.getAllResponseHeaders());
-            outputCode = this.getResponseHeader("Location");
-            alert("Your output has gone to: " + outputCode);
-        }
-    };
-    xhttp.open("POST","https://jsonblob.com/api/jsonBlob");
-    xhttp.setRequestHeader("Content-type","application/json");
-    xhttp.setRequestHeader("Accept","application/json");
-    xhttp.setRequestHeader("Access-Control-Expose-Headers","Location");
-    xhttp.send(body);
+            else{
+                break
+            }
+            counter++;
+        };
+        body += "}"
+        alert(body);
+        var outputCode;
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 201) {
+                alert(this.status.toString());
+                alert(this.response);
+                alert(xhttp.getAllResponseHeaders());
+                //outputCode = this.getResponseHeader("Location");
+                //alert("Your output has gone to: " + outputCode);
+                alert("Your Kindle Notepad Creation has been sent!");
+            }
+        };
+        xhttp.open("PUT",url);
+        xhttp.setRequestHeader("Content-type","application/json");
+        xhttp.setRequestHeader("Accept","application/json");
+        xhttp.setRequestHeader("Access-Control-Expose-Headers","Location");
+        xhttp.send(body);
+    }
+    else{
+        alert("Nothing has been sent...");
+    }
 }
 function receiveDataJSON(){
-    var url = prompt("What's your data url?");
+    var axhttp = new XMLHttpRequest();
+    axhttp.open("POST", "https://jsonblob.com/api/jsonBlob", false);
+    axhttp.setRequestHeader("Content-type","application/json");
+    axhttp.setRequestHeader("Accept","application/json");
+    axhttp.send('{"NoData":"Yep nothing"}');
+    var loc = axhttp.getResponseHeader("Location");
+    var locconf = confirm("Send data to:" + loc + "\nDo not press \"OK\" until you have sent your notepad from the Kindle end!\n(Press cancel to cancel)");
+    if (locconf) {
+        var url = loc;
+    }
+    else {
+        var url = null;
+    }
+    //var url = prompt("What's your data url?");
     if (url !== "" && url !== null){
         var xhttp = new XMLHttpRequest();
         var outputCode;
@@ -173,6 +193,9 @@ function receiveDataJSON(){
         xhttp.send();
     }
     else{
+        var cxhttp = new XMLHttpRequest();
+        cxhttp.open("DELETE", loc);
+        cxhttp.send();
         alert("Nothing's been changed...");
     }
 }
@@ -190,5 +213,5 @@ onload = function(){
     document.getElementById("Paige").onchange = "updateCookies();";
     document.getElementById("paigedisp").innerHTML = p(1).toString();
     updateCookies();
-    autoSave = setInterval(updateCookies, 5000);
+    autoSave = setInterval(updateCookies, 20000);
 }
