@@ -215,7 +215,7 @@ onload = function(){
     updateCookies();
     autoSave = setInterval(updateCookies, 20000);
     alert(navigator.userAgent);
-    if (navigator.userAgent.toLowerCase().indexOf("kindle") !== -1){
+    if (navigator.userAgent.toLowerCase().indexOf("x11; ; u; linux armv71;") !== -1){
         document.getElementById("Share").style.display = "none";
         document.getElementById("Share 2").style.display = "none";
     }
