@@ -1,4 +1,3 @@
-
 <html>
     <head>
         <script src="smtp.js"></script>
@@ -10,18 +9,18 @@
             }
         </style>
     </head>
-    <body>
+    <body style="margin: 0px;">
         <div style="width:100%;height:100%;margin:0px;">
             <button id="KitKat Bar" onclick="updateCookies();" style="display:block;width:100%;text-align:center;height:10%">💾Save💾</button>
             <textarea id="Paige" width="100%" height="40%" style="height:80%;width:100%;" placeholder="Welcome to the notepad!"></textarea>
             <div style="width:100%;text-align: center;height:10%;">
-                <button class="bbar" id="Send" style="display:inline-block;width:7.5%;" onclick="sendDataJSON()">Send</button>
+                <button class="bbar" id="Send" style="display:inline-block;width:18.5%;" onclick="sendDataJSON()">Send</button>
                 <button class="bbar" id="Share 2" style="display:none;width:7.5%;" onclick="DAT()">Download</button>
                 <button class="bbar" id="back" onclick="window.location.href = window.location.href.split('?')[0] + '?p=' + (p(1) - 1).toString();" style="display:inline-block;width:30%;">&lt;-</button>
                 <p class="bbar" id="paigedisp" style="display:inline-block;height:inherit;"></p>
                 <button class="bbar" id="forward" onclick="window.location.href = window.location.href.split('?')[0] + '?p=' + (p(1) + 1).toString();" style="display:inline-block;width:30%;">-&gt;</button>
-                <button class="bbar" id="Share" style="display:none;width:7.5%;" onclick="sendEmail();">Share</button>
-                <button class="bbar" id="Receive" style="display:inline-block;width:7.5%;" onclick="kreceiveDataJSON();">Receive</button>
+                <button class="bbar" id="Share" style="display:none;width:7.5%;" onclick="sendEmail();">Email</button>
+                <button class="bbar" id="Receive" style="display:inline-block;width:18.5%;" onclick="kreceiveDataJSON();">Receive</button>
             </div>
         </div>
         <p style="display:none;" id="pn">1</p>
