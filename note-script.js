@@ -300,6 +300,8 @@ onload = function(){
         document.getElementById("Share 2").style.display = "inline-block";
         document.getElementById("Receive").onclick = receiveDataJSON;
         document.getElementById("Send").onclick = csendDataJSON;
+        document.getElementById("Send").style.width = "11%";
+        document.getElementById("Receive").style.width = "11%";
     }
 }
 if (getCookie("PC") == "") {
