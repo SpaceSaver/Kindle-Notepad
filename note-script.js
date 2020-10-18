@@ -68,7 +68,7 @@ function DAT(){
     //var data = new Blob([body], {type: 'text/plain'});
     //var url = window.URL.createObjectURL(data);
     //document.location.href = url;
-    download(new Blob([body]),"KindleNotepadCreation.txt","text/plain");
+    download(new Blob([body]),"KindleNotepadCreation.html","text/plain");
 }
 function sendDataJSON(){
     var url = prompt("What's your data url?");
