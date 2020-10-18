@@ -72,9 +72,7 @@ function sendEmail() {
         body += "</html>";
         alert("Sending...");
         Email.send({
-        Host: "smtp.gmail.com",
-        Username : "kindlenotepadwebapp@gmail.com",
-        Password : "B0tsRule",
+        SecureToken: "67518cf0-69a0-4d1d-bfcf-2b4655a3b15e",
         To : recip,
         From : "kindlenotepadwebapp@gmail.com",
         Subject : "Your Kindle Notepad Creation!",
