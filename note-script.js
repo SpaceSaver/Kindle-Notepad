@@ -51,39 +51,6 @@ function updateCookies(){
     button.innerHTML = "Saved!"
     setTimeout(function(){document.getElementById("KitKat Bar").innerHTML = "💾Save💾";}, 2000);
 }
-function sendEmail() {
-    var recip = prompt("What email would you like this to go to?", "exampleuser@example.co.uk")
-    if (recip == "" || recip == null){
-        alert("Nothing has been sent...");
-    }
-    else {
-        var body = "<html>";
-        var counter = 1;
-        while (true) {
-            if (getCookie("Paige" + counter.toString()) !== ""){
-                body += "<h1>Page " + counter.toString() + "</h1><p>" + getCookie("Paige" + counter.toString()) + "</p>";
-                //alert(getCookie("Paige" + counter.toString()))
-            }
-            else{
-                break
-            }
-            counter++;
-        }
-        body += "</html>";
-        alert("Sending...");
-        Email.send({
-        SecureToken: "67518cf0-69a0-4d1d-bfcf-2b4655a3b15e",
-        To : recip,
-        From : "kindlenotepadwebapp@gmail.com",
-        Subject : "Your Kindle Notepad Creation!",
-        Body : body,
-        }).then(
-            function(message){
-                alert("Mail sent successfully!")
-            }
-        );
-    }
-}
 function DAT(){
     var body = "<html>";
     var counter = 1;
