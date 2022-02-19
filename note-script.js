@@ -46,10 +46,10 @@ function deleteCookie(cname){
 }
 function updateCookies(){
     var button = document.getElementById("KitKat Bar");
-    button.innerHTML = "Saving↻..."
+    button.innerHTML = "Saving&orarr;..."
     setCookie(p(),document.getElementById("Paige").value,36500);
     button.innerHTML = "Saved!"
-    setTimeout(function(){document.getElementById("KitKat Bar").innerHTML = "💾Save💾";}, 2000);
+    setTimeout(function(){document.getElementById("KitKat Bar").innerHTML = "&#128190;Save&#128190;";}, 2000);
 }
 function DAT(){
     var body = "<html>";
@@ -115,47 +115,41 @@ function sendDataJSON(){
     }
 }
 function csendDataJSON(){
-    var url = prompt("What's your data url?");
-    if (url !== null && url !== ""){
-        var xhttp = new XMLHttpRequest();
-        var body = "{";
-        var counter = 1;
-        while (true) {
-            if (getCookie("Paige" + counter.toString()) !== ""){
-                if (counter > 1) {
-                    body += ","
-                }
-                var ckey = "Page " + counter.toString()
-                var cval = getCookie("Paige" + counter.toString())
-                body += "\"" + ckey + "\":\"" + cval + "\"";
-                //alert(getCookie("Paige" + counter.toString()))
+    var xhttp = new XMLHttpRequest();
+    var body = "{";
+    var counter = 1;
+    while (true) {
+        if (getCookie("Paige" + counter.toString()) !== ""){
+            if (counter > 1) {
+                body += ","
             }
-            else{
-                break
-            }
-            counter++;
-        };
-        body += "}"
-        alert(body);
-        var outputCode;
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 201) {
-                //alert(this.status.toString());
-                //alert(this.response);
-                //alert(xhttp.getAllResponseHeaders());
-                outputCode = this.getResponseHeader("Location");
-                alert("Your Kindle Notepad creation has gone to: " + outputCode);
-            }
-        };
-        xhttp.open("POST","https://jsonblob.com/api/jsonBlob");
-        xhttp.setRequestHeader("Content-type","application/json");
-        xhttp.setRequestHeader("Accept","application/json");
-        xhttp.setRequestHeader("Access-Control-Expose-Headers","Location");
-        xhttp.send(body);
+            var ckey = "Page " + counter.toString()
+            var cval = getCookie("Paige" + counter.toString())
+            body += "\"" + ckey + "\":\"" + cval + "\"";
+            //alert(getCookie("Paige" + counter.toString()))
+        }
+        else{
+            break
+        }
+        counter++;
     }
-    else{
-        alert("Nothing has been sent...");
-    }
+    body += "}"
+    alert(body);
+    var outputCode;
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 201) {
+            //alert(this.status.toString());
+            //alert(this.response);
+            //alert(xhttp.getAllResponseHeaders());
+            outputCode = this.getResponseHeader("Location");
+            alert("Your Kindle Notepad creation has gone to: " + outputCode);
+        }
+    };
+    xhttp.open("POST","https://jsonblob.com/api/jsonBlob");
+    xhttp.setRequestHeader("Content-type","application/json");
+    xhttp.setRequestHeader("Accept","application/json");
+    xhttp.setRequestHeader("Access-Control-Expose-Headers","Location");
+    xhttp.send(body);
 }
 function receiveDataJSON(){
     var axhttp = new XMLHttpRequest();
